@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Packages · 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0d1152;
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 48px 56px 64px;
+  }
+
+  /* HEADER */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 28px;
+  }
+  .badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: #5ee8b5;
+    border-radius: 50%;
+  }
+
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 64px;
+    line-height: 1.05;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.65;
+    max-width: 520px;
+    margin-bottom: 48px;
+  }
+
+  /* PRICING NOTE */
+  .meta-note {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.35);
+    text-align: right;
+    letter-spacing: 0.03em;
+    margin-bottom: 20px;
+  }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 28px 24px 24px;
+    position: relative;
+  }
+
+  .card.featured {
+    border: 1.5px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.09);
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #5ee8b5;
+    color: #0d1152;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .tier-label {
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .card-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.15;
+    color: #ffffff;
+  }
+
+  .orbit-icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    opacity: 0.55;
+  }
+
+  .card-tagline {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    margin-bottom: 6px;
+  }
+  .price-dollar {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 12px;
+  }
+  .price-amount {
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: #ffffff;
+  }
+  .price-note {
+    font-size: 10.5px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.3;
+    margin-left: 4px;
+    align-self: flex-end;
+    margin-bottom: 4px;
+  }
+
+  .timeline-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 4px;
+  }
+  .timeline-badge svg {
+    width: 13px; height: 13px;
+    opacity: 0.6;
+  }
+
+  .client-dep {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.5);
+    margin-left: 6px;
+  }
+
+  /* Rush service toggle */
+  .rush-box {
+    border: 1px dashed rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin: 14px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .rush-label { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); }
+  .rush-sub { font-size: 11px; color: rgba(255,255,255,0.4); }
+  .toggle {
+    width: 34px; height: 20px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 999px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .toggle::after {
+    content: '';
+    width: 14px; height: 14px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    position: absolute;
+    top: 3px; left: 3px;
+  }
+
+  /* Feature list */
+  .features-list {
+    list-style: none;
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .features-list li {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.45;
+    padding-left: 16px;
+    position: relative;
+  }
+  .features-list li::before {
+    content: '';
+    width: 5px; height: 5px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    position: absolute;
+    left: 2px;
+    top: 6px;
+  }
+  .features-list li.muted {
+    color: rgba(255,255,255,0.25);
+    text-decoration: line-through;
+    text-decoration-color: rgba(255,255,255,0.15);
+  }
+  .features-list li.muted::before {
+    background: rgba(255,255,255,0.15);
+  }
+
+  /* Inherits badge inside cards */
+  .inherits-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 14px;
+    margin-bottom: 2px;
+  }
+  .inherits-row .arrow-up {
+    color: #5ee8b5;
+    font-size: 13px;
+  }
+  .inherits-row strong {
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+  }
+
+  /* CTA button */
+  .cta-btn {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 12px;
+    padding: 13px 16px;
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  .card.featured .cta-btn {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.3);
+  }
+
+  /* Best for box */
+  .best-for-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: 14px;
+  }
+  .best-for-box .bf-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 6px;
+  }
+  .best-for-box p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.55;
+  }
+  .best-for-box .deliverable-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .footer-col .f-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 8px;
+  }
+  .footer-col p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.55;
+  }
+
+  /* Orbit SVG circles */
+</style>
+</head>
+<body>
+
+<div class="badge">Website Packages · 2026</div>
+
+<h1 class="hero-title">Pricing that grows <em>with</em><br><em>you.</em></h1>
+<p class="hero-sub">Four packages, one philosophy: get online fast, then grow with intention. Pick the stage you're at — every tier carries forward into the next.</p>
+
+<p class="meta-note">All prices in USD · One-time project fee</p>
+
+<div class="cards-grid">
+
+  <!-- TIER 01 -->
+  <div class="card">
+    <div class="tier-label"><span>TIER 01 · 3 PAGES</span></div>
+    <div class="card-top">
+      <div class="card-name">Crack the<br>Shell</div>
+      <svg class="orbit-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="26" cy="26" r="3" fill="white" opacity="0.9"/>
+        <circle cx="26" cy="26" r="9" stroke="white" stroke-width="1" opacity="0.4"/>
+        <circle cx="26" cy="26" r="16" stroke="white" stroke-width="1" opacity="0.25"/>
+        <circle cx="26" cy="26" r="23" stroke="white" stroke-width="1" opacity="0.12"/>
+        <circle cx="26" cy="10" r="2.5" fill="white" opacity="0.7"/>
+      </svg>
+    </div>
+    <p class="card-tagline">Establish your online presence</p>
+    <div class="price-row">
+      <span class="price-dollar">$</span>
+      <span class="price-amount">1,200</span>
+      <span class="price-note">one-<br>time</span>
+    </div>
+    <div style="margin-bottom:14px;">
+      <span class="timeline-badge">
+        <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        4 weeks
+      </span>
+    </div>
+    <div class="rush-box">
+      <div>
+        <div class="rush-label">Rush service</div>
+        <div class="rush-sub">+$300 · faster delivery</div>
+      </div>
+      <div class="toggle"></div>
+    </div>
+    <ul class="features-list">
+      <li>Custom 3-page WordPress design</li>
+      <li>Brand & design definition — colors, fonts, visual direction</li>
+      <li>Basic SEO — image optimization & correct heading structure</li>
+      <li>Keyword-driven meta titles and descriptions</li>
+      <li>2 rounds of feedback</li>
+      <li>Video walkthrough on how to use the platform</li>
+      <li class="muted">Content writing & optimization</li>
+    </ul>
+    <div class="cta-btn">
+      <span>Start with &nbsp;<strong>Crack</strong></span>
+      <span>→</span>
+    </div>
+  </div>
+
+  <!-- TIER 02 -->
+  <div class="card">
+    <div class="tier-label"><span>TIER 02 · 6 PAGES</span></div>
+    <div class="card-top">
+      <div class="card-name">Plant the<br>Seed</div>
+      <svg class="orbit-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="26" cy="26" r="3" fill="white" opacity="0.9"/>
+        <circle cx="26" cy="26" r="9" stroke="white" stroke-width="1" opacity="0.4"/>
+        <circle cx="26" cy="26" r="16" stroke="white" stroke-width="1" opacity="0.25"/>
+        <circle cx="26" cy="26" r="23" stroke="white" stroke-width="1" opacity="0.12"/>
+        <circle cx="35" cy="10" r="2.5" fill="white" opacity="0.7"/>
+      </svg>
+    </div>
+    <p class="card-tagline">Launch with SEO basics in place</p>
+    <div class="price-row">
+      <span class="price-dollar">$</span>
+      <span class="price-amount">3,500</span>
+      <span class="price-note">one-<br>time</span>
+    </div>
+    <div style="margin-bottom:14px; display:flex; align-items:center; flex-wrap:wrap; gap:6px;">
+      <span class="timeline-badge">
+        <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        12 weeks
+      </span>
+      <span class="client-dep">ⓘ client-dependent</span>
+    </div>
+    <ul class="features-list">
+      <li>Custom 6-page SEO-optimized WordPress site</li>
+      <li>Brand bible & target-audience document</li>
+      <li>Sitemap strategy & keyword research (industry tools)</li>
+      <li>Collaborative content process — guided interview + we write</li>
+      <li>Content optimization based on SEO keywords & tool metrics</li>
+      <li>Cohesive visual identity applied across all pages</li>
+      <li>On-page optimization — headings, keywords, images, internal links, page speed</li>
+      <li>Optimized meta titles & descriptions for every page</li>
+      <li>Google Business Profile creation (if needed)</li>
+      <li>Google Search Console & Google Analytics setup</li>
+      <li>2 rounds of feedback</li>
+      <li>Video walkthrough on how to use the platform</li>
+    </ul>
+    <div class="best-for-box">
+      <div class="bf-label">Best for</div>
+      <p>Small businesses ready to launch a custom website with the SEO basics in place. You want a complete website that covers everything a potential client needs to know — who you are, what you offer, why you, and how to reach you — with the SEO/GEO strategy already in place.</p>
+      <div class="deliverable-label">Deliverable</div>
+      <p>A complete 6-page SEO-optimized WordPress website. Typical structure: Home, About, Services, an individual service or portfolio page, Blog or Resources setup, and Contact — tailored to your business needs.</p>
+    </div>
+    <div class="cta-btn">
+      <span>Start with &nbsp;<strong>Plant</strong></span>
+      <span>→</span>
+    </div>
+  </div>
+
+  <!-- TIER 03 -->
+  <div class="card featured">
+    <div class="popular-badge">MOST POPULAR</div>
+    <div class="tier-label"><span>TIER 03 · 12 PAGES</span></div>
+    <div class="card-top">
+      <div class="card-name">Launch &amp;<br>Bloom</div>
+      <svg class="orbit-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="26" cy="26" r="3" fill="white" opacity="0.9"/>
+        <circle cx="26" cy="26" r="9" stroke="white" stroke-width="1" opacity="0.5"/>
+        <circle cx="26" cy="26" r="16" stroke="white" stroke-width="1" opacity="0.3"/>
+        <circle cx="26" cy="26" r="23" stroke="white" stroke-width="1" opacity="0.15"/>
+        <circle cx="42" cy="18" r="2.5" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <p class="card-tagline">Deeper SEO with schema markup</p>
+    <div class="price-row">
+      <span class="price-dollar">$</span>
+      <span class="price-amount">5,500</span>
+      <span class="price-note">one-<br>time</span>
+    </div>
+    <div style="margin-bottom:14px;">
+      <span class="timeline-badge">
+        <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        2 months
+      </span>
+    </div>
+    <div class="inherits-row">
+      <span class="arrow-up">↑</span>
+      <span>Everything in <strong>Plant the Seed</strong>, plus:</span>
+    </div>
+    <ul class="features-list">
+      <li>Schema markup — structured data that helps Google & AI tools understand exactly what your business does</li>
+      <li>12-page website launch</li>
+      <li>30-day post-launch check-in call — review performance, answer questions, identify early adjustments</li>
+    </ul>
+    <div class="cta-btn">
+      <span>Start with &nbsp;<strong>Launch</strong></span>
+      <span>→</span>
+    </div>
+  </div>
+
+  <!-- TIER 04 -->
+  <div class="card">
+    <div class="tier-label"><span>TIER 04 · 20 PAGES</span></div>
+    <div class="card-top">
+      <div class="card-name">Ready to<br>Rise</div>
+      <svg class="orbit-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="26" cy="26" r="3" fill="white" opacity="0.9"/>
+        <circle cx="26" cy="26" r="9" stroke="white" stroke-width="1" opacity="0.5"/>
+        <circle cx="26" cy="26" r="16" stroke="white" stroke-width="1" opacity="0.3"/>
+        <circle cx="26" cy="26" r="23" stroke="white" stroke-width="1" opacity="0.15"/>
+        <circle cx="46" cy="26" r="2.5" fill="white" opacity="0.8"/>
+      </svg>
+    </div>
+    <p class="card-tagline">Full content strategy & local reach</p>
+    <div class="price-row">
+      <span class="price-dollar">$</span>
+      <span class="price-amount">8,000</span>
+      <span class="price-note">one-<br>time</span>
+    </div>
+    <div style="margin-bottom:14px;">
+      <span class="timeline-badge">
+        <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3.5l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        3 months
+      </span>
+    </div>
+    <div class="inherits-row">
+      <span class="arrow-up">↑</span>
+      <span>Everything in <strong>Plant the Seed</strong>, plus:</span>
+    </div>
+    <ul class="features-list">
+      <li>Listing on aggregators</li>
+      <li>2 local pages</li>
+      <li>1-month content-calendar strategy based on keyword research</li>
+      <li>20-page WordPress website launch</li>
+    </ul>
+    <div class="cta-btn">
+      <span>Start with &nbsp;<strong>Ready</strong></span>
+      <span>→</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-col">
+    <div class="f-label">Payment Terms</div>
+    <p>50% to start, 50% on launch. Rush service billed upfront.</p>
+  </div>
+  <div class="footer-col">
+    <div class="f-label">What You Provide</div>
+    <p>Brand assets if you have them, content review, and timely feedback on each round.</p>
+  </div>
+  <div class="footer-col">
+    <div class="f-label">After Launch</div>
+    <p>Hosting & maintenance are quoted separately based on your stack.</p>
+  </div>
+</div>
+
+</body>
+</html>
